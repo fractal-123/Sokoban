@@ -1,0 +1,3 @@
+Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"C:/Csharp/Sokoban/Content/box-docked.png","C:/Csharp/Sokoban/Content/bin/DesktopGL/box-docked.xnb","TextureProcessor","Texture2DContent",273,1685,0,1744295
+"C:/Csharp/Sokoban/Content/File.spritefont","C:/Csharp/Sokoban/Content/bin/DesktopGL/DefaultFont.xnb","LocalizedFontProcessor","SpriteFontContent",2883,139949,0,1384106
