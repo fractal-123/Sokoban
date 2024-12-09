@@ -2,11 +2,11 @@
 {
     public enum TileType
     {
-        Floor,  // Пол
-        Wall,   // Стена
-        Box,    // Ящик
-        Target, // Цель для ящика
-        Player,  // Игрок
-        BoxDocked
+        Floor,  // пол
+        Wall,   // стена
+        Box,    // ящик
+        Target, // цель для ящика
+        Player,  // игрок
+        BoxDocked // ящик, который стоит на цели
     }
 }

@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Sokoban
 {
     public class LevelManager
     {
-        // Список уровней
+        
         public List<TileType[,]> levels;
         public int CurrentLevel { get; private set; } = 0;
         public TileType[,] OriginalMap { get; private set; }
 
-        // Текущая карта уровня
+        
         public TileType[,] CurrentMap { get; private set; }
 
         public LevelManager()
@@ -46,26 +45,26 @@ namespace Sokoban
                 { TileType.Wall, TileType.Wall, TileType.Floor, TileType.Wall, TileType.Wall, TileType.Wall, TileType.Wall, TileType.Floor, TileType.Wall },
                 { TileType.Wall, TileType.Floor, TileType.Floor, TileType.Floor, TileType.Floor, TileType.Floor, TileType.Floor, TileType.Floor, TileType.Wall },
                 { TileType.Wall, TileType.Floor, TileType.Floor, TileType.Wall, TileType.Wall, TileType.Wall, TileType.Wall, TileType.Wall, TileType.Wall },
-                { TileType.Wall, TileType.Player, TileType.Floor, TileType.Floor, TileType.Floor, TileType.Target, TileType.Target, TileType.Target, TileType.Wall },
+                { TileType.Wall, TileType.Player, TileType.Floor, TileType.Floor, TileType.Floor, TileType.Floor, TileType.Target, TileType.Target, TileType.Wall },
                 { TileType.Wall, TileType.Wall, TileType.Wall, TileType.Wall, TileType.Wall, TileType.Wall, TileType.Wall, TileType.Wall, TileType.Wall }
             });
 
             
         }
 
-        // Метод для загрузки уровня по индексу
+        //метод для загрузки уровня по индексу
         public bool LoadLevel(int levelIndex)
         {
             if (levelIndex < 0 || levelIndex >= levels.Count)
                 return false;
 
             CurrentLevel = levelIndex;
-            CurrentMap = (TileType[,])levels[levelIndex].Clone(); // Копируем карту
-            OriginalMap = (TileType[,])levels[levelIndex].Clone(); // Сохраняем оригинальную карту
+            CurrentMap = (TileType[,])levels[levelIndex].Clone(); 
+            OriginalMap = (TileType[,])levels[levelIndex].Clone(); 
             return true;
         }
 
-        // Возвращает общее количество уровней
+        // возвращает общее количество уровней
         public int GetTotalLevels()
         {
             return levels.Count;

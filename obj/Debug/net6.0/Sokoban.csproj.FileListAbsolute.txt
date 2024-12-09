@@ -32,3 +32,4 @@ C:\Csharp\Sokoban\bin\Debug\net6.0\Content\font.xnb
 C:\Csharp\Sokoban\bin\Debug\net6.0\Content\DefaultFont.xnb
 C:\Csharp\Sokoban\bin\Debug\net6.0\Content\File.xnb
 C:\Csharp\Sokoban\bin\Debug\net6.0\Content\box-docked.xnb
+C:\Csharp\Sokoban\obj\Debug\net6.0\Sokoban.sourcelink.json

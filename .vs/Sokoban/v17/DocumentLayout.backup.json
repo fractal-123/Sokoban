@@ -7,24 +7,16 @@
       "RelativeMoniker": "D:0:0:{329471FF-B04F-40F3-9FDC-0B6623F6EE72}|Sokoban.csproj|solutionrelative:game1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{329471FF-B04F-40F3-9FDC-0B6623F6EE72}|Sokoban.csproj|c:\\csharp\\sokoban\\gamestate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{329471FF-B04F-40F3-9FDC-0B6623F6EE72}|Sokoban.csproj|solutionrelative:gamestate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{329471FF-B04F-40F3-9FDC-0B6623F6EE72}|Sokoban.csproj|c:\\csharp\\sokoban\\texturemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{329471FF-B04F-40F3-9FDC-0B6623F6EE72}|Sokoban.csproj|solutionrelative:texturemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{329471FF-B04F-40F3-9FDC-0B6623F6EE72}|Sokoban.csproj|c:\\csharp\\sokoban\\mainmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{329471FF-B04F-40F3-9FDC-0B6623F6EE72}|Sokoban.csproj|solutionrelative:mainmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{329471FF-B04F-40F3-9FDC-0B6623F6EE72}|Sokoban.csproj|c:\\csharp\\sokoban\\levelmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{329471FF-B04F-40F3-9FDC-0B6623F6EE72}|Sokoban.csproj|solutionrelative:levelmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{329471FF-B04F-40F3-9FDC-0B6623F6EE72}|Sokoban.csproj|c:\\csharp\\sokoban\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{329471FF-B04F-40F3-9FDC-0B6623F6EE72}|Sokoban.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{329471FF-B04F-40F3-9FDC-0B6623F6EE72}|Sokoban.csproj|c:\\csharp\\sokoban\\tiletype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{329471FF-B04F-40F3-9FDC-0B6623F6EE72}|Sokoban.csproj|solutionrelative:tiletype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{329471FF-B04F-40F3-9FDC-0B6623F6EE72}|Sokoban.csproj|c:\\csharp\\sokoban\\texturemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{329471FF-B04F-40F3-9FDC-0B6623F6EE72}|Sokoban.csproj|solutionrelative:texturemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -46,80 +38,52 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "TileType.cs",
-              "DocumentMoniker": "C:\\Csharp\\Sokoban\\TileType.cs",
-              "RelativeDocumentMoniker": "TileType.cs",
-              "ToolTip": "C:\\Csharp\\Sokoban\\TileType.cs",
-              "RelativeToolTip": "TileType.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-07T16:36:02.696Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "GameState.cs",
-              "DocumentMoniker": "C:\\Csharp\\Sokoban\\GameState.cs",
-              "RelativeDocumentMoniker": "GameState.cs",
-              "ToolTip": "C:\\Csharp\\Sokoban\\GameState.cs",
-              "RelativeToolTip": "GameState.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-07T13:06:14.616Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "TextureManager.cs",
-              "DocumentMoniker": "C:\\Csharp\\Sokoban\\TextureManager.cs",
-              "RelativeDocumentMoniker": "TextureManager.cs",
-              "ToolTip": "C:\\Csharp\\Sokoban\\TextureManager.cs",
-              "RelativeToolTip": "TextureManager.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAQwA0AAAAEAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-06T13:15:21.849Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Game1.cs",
               "DocumentMoniker": "C:\\Csharp\\Sokoban\\Game1.cs",
               "RelativeDocumentMoniker": "Game1.cs",
               "ToolTip": "C:\\Csharp\\Sokoban\\Game1.cs*",
               "RelativeToolTip": "Game1.cs*",
-              "ViewState": "AgIAAN8AAAAAAAAAAAAcwPUAAAANAAAAAAAAAA==",
+              "ViewState": "AgIAAFEAAAAAAAAAAAAqwGkAAABaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-29T12:34:40.835Z",
+              "WhenOpened": "2024-12-09T06:17:29.793Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "LevelManager.cs",
-              "DocumentMoniker": "C:\\Csharp\\Sokoban\\LevelManager.cs",
-              "RelativeDocumentMoniker": "LevelManager.cs",
-              "ToolTip": "C:\\Csharp\\Sokoban\\LevelManager.cs",
-              "RelativeToolTip": "LevelManager.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAA8wDoAAAA9AAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "TileType.cs",
+              "DocumentMoniker": "C:\\Csharp\\Sokoban\\TileType.cs",
+              "RelativeDocumentMoniker": "TileType.cs",
+              "ToolTip": "C:\\Csharp\\Sokoban\\TileType.cs",
+              "RelativeToolTip": "TileType.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-07T16:49:36.605Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-09T06:17:00.067Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "MainMenu.cs",
-              "DocumentMoniker": "C:\\Csharp\\Sokoban\\MainMenu.cs",
-              "RelativeDocumentMoniker": "MainMenu.cs",
-              "ToolTip": "C:\\Csharp\\Sokoban\\MainMenu.cs",
-              "RelativeToolTip": "MainMenu.cs",
-              "ViewState": "AgIAABYAAAAAAAAAAAAkwD4AAAAAAAAAAAAAAA==",
+              "Title": "TextureManager.cs",
+              "DocumentMoniker": "C:\\Csharp\\Sokoban\\TextureManager.cs",
+              "RelativeDocumentMoniker": "TextureManager.cs",
+              "ToolTip": "C:\\Csharp\\Sokoban\\TextureManager.cs",
+              "RelativeToolTip": "TextureManager.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-07T12:58:56.676Z",
+              "WhenOpened": "2024-12-09T06:16:52.622Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Csharp\\Sokoban\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Csharp\\Sokoban\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-09T06:16:51.526Z",
               "EditorCaption": ""
             }
           ]

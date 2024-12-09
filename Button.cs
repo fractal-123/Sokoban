@@ -15,6 +15,9 @@ namespace Sokoban
         private Color hoverColor = Color.Gray;
         private Color currentColor;
 
+        public TextureManager textureManager;
+        public Game1 game1;
+
         public event Action OnClick;
 
         public Button(Texture2D texture, SpriteFont font, Rectangle bounds, string text)
@@ -50,7 +53,7 @@ namespace Sokoban
         {
             spriteBatch.Draw(texture, bounds, currentColor);
 
-            // Отрисовка текста по центру кнопки
+            
             Vector2 textSize = font.MeasureString(text);
             Vector2 textPosition = new Vector2(
                 bounds.X + (bounds.Width - textSize.X) / 2,
@@ -59,5 +62,7 @@ namespace Sokoban
 
             spriteBatch.DrawString(font, text, textPosition, Color.Black);
         }
+
+        
     }
 }

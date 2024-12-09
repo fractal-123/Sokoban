@@ -2,7 +2,6 @@
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
-using System;
 
 namespace Sokoban
 {
@@ -28,11 +27,11 @@ namespace Sokoban
         private KeyboardState currentKeyboardState;
         private KeyboardState previousKeyboardState;
         private List<Button> gameScreenButtons;
+        private Button levelCompletedButton;
 
 
-
-        private double elapsedTime = 0; // Прошедшее время в секундах
-        private int secondsCounter = 0; // Секундный счётчик
+        private double elapsedTime = 0; 
+        private int secondsCounter = 0; 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -48,22 +47,20 @@ namespace Sokoban
             textureManager = new TextureManager();
             textureManager.LoadTexture(Content);
             levelManager = new LevelManager();
+
             gameScreenButtons = new List<Button>();
             settingsButtons = new List<Button>();
-
-
             mainMenu = new MainMenu(GraphicsDevice, textureManager, newState => currentGameState = newState);
-
+              
 
             InitButtons();
 
 
         }
-
-
+        // подгружает кнопки 
         public void InitButtons()
         {
-
+           
             SpriteFont font = textureManager.GetFont();
             Texture2D buttonTexture = new Texture2D(GraphicsDevice, 1, 1);
             buttonTexture.SetData(new[] { Color.White });
@@ -79,8 +76,15 @@ namespace Sokoban
             // Кнопка "Выход" в игрвой зоне
             gameScreenButtons.Add(new Button(buttonTexture, font, new Rectangle(30, 80, 150, 50), "Выход"));
             gameScreenButtons[1].OnClick += () => currentGameState = GameState.LevelSelection;
+
+            levelCompletedButton = new Button(buttonTexture, font, new Rectangle(graphics.PreferredBackBufferWidth / 2 - 100, graphics.PreferredBackBufferHeight / 2 + 50, 200, 50), "В меню");
+            levelCompletedButton.OnClick += () => currentGameState = GameState.LevelSelection;
+
+
+
             base.Initialize();
         }
+
 
         protected override void LoadContent()
         {
@@ -91,6 +95,7 @@ namespace Sokoban
             SpriteFont font = textureManager.GetFont();
             Texture2D buttonTexture = new Texture2D(GraphicsDevice, 1, 1);
             buttonTexture.SetData(new[] { Color.White });
+            
 
             for (int i = 0; i < levelManager.GetTotalLevels(); i++)
             {
@@ -98,6 +103,10 @@ namespace Sokoban
                 int levelIndex = i;
                 levelButtons[i].OnClick += () => StartGame(levelIndex);
             }
+
+            Button backToMenuButton = new Button(buttonTexture, font, new Rectangle(30, 30, 200, 50), "В меню");
+            backToMenuButton.OnClick += () => currentGameState = GameState.MainMenu;
+            levelButtons.Add(backToMenuButton);
         }
 
         protected override void Update(GameTime gameTime)
@@ -125,6 +134,7 @@ namespace Sokoban
                 case GameState.LevelSelection:
                     foreach (var button in levelButtons)
                         button.Update(currentMouseState, previousMouseState);
+
                     break;
 
                 case GameState.Settings:
@@ -137,6 +147,9 @@ namespace Sokoban
                         button.Update(currentMouseState, previousMouseState);
 
                     UpdateGameLogic();
+                    break;
+                case GameState.LevelCompleted:
+                    levelCompletedButton.Update(currentMouseState, previousMouseState);
                     break;
             }
 
@@ -172,14 +185,17 @@ namespace Sokoban
                     break;
 
                 case GameState.Playing:
-                    DrawGameField( gameTime);
+                    DrawGameField(gameTime);
+                    break;
+
+                case GameState.LevelCompleted:
+                    DrawLevelCompletedScreen();
                     break;
             }
-
-            _spriteBatch.End();
+                _spriteBatch.End();
             base.Draw(gameTime);
         }
-
+        //стартует уровень 
         public void StartGame(int levelIndex)
         {
             currentGameState = GameState.Playing;
@@ -187,7 +203,7 @@ namespace Sokoban
             InitializePlayerPosition(levelManager.CurrentMap);
             moveCount = 0;
         }
-
+        //находит на карте позицию игрока и инициализрует его координаты
         public void InitializePlayerPosition(TileType[,] currentMap)
         {
             for (int y = 0; y < currentMap.GetLength(0); y++)
@@ -204,6 +220,8 @@ namespace Sokoban
             }
         }
 
+        // метод ответственный за обновление игровой логики
+        // то есть за то, какие клавиши нажаты 
         public void UpdateGameLogic()
         {
             KeyboardState currentKeyboardState = Keyboard.GetState();
@@ -228,7 +246,7 @@ namespace Sokoban
 
             previousKeyboardState = currentKeyboardState;
         }
-
+        //метод отвечает за движения игрока 
         public void MovePlayer(int deltaX, int deltaY)
         {
             int newPlayerX = playerX + deltaX;
@@ -252,19 +270,16 @@ namespace Sokoban
                     (levelManager.CurrentMap[newBoxY, newBoxX] == TileType.Floor ||
                      levelManager.CurrentMap[newBoxY, newBoxX] == TileType.Target))
                 {
-                    if (levelManager.CurrentMap[newBoxY, newBoxX] == TileType.Target)
-                    {
-                        levelManager.CurrentMap[newBoxY, newBoxX] = TileType.BoxDocked;
-                    }
-                    else
-                    {
-                        levelManager.CurrentMap[newBoxY, newBoxX] = TileType.Box;
-                    }
+                    // обновляем ящик
+                    levelManager.CurrentMap[newBoxY, newBoxX] =
+                        levelManager.OriginalMap[newBoxY, newBoxX] == TileType.Target 
+                        ? TileType.BoxDocked 
+                        : TileType.Box;
 
-                    // Ящик покидает текущую клетку
+                    // сбрасываем клетку, которую покинул ящик
                     levelManager.CurrentMap[newPlayerY, newPlayerX] =
-                        levelManager.OriginalMap[newPlayerY, newPlayerX] == TileType.Target
-                        ? TileType.Target
+                        levelManager.OriginalMap[newPlayerY, newPlayerX] == TileType.Target 
+                        ? TileType.Target 
                         : TileType.Floor;
                 }
                 else
@@ -283,40 +298,44 @@ namespace Sokoban
             levelManager.CurrentMap[playerY, playerX] = TileType.Player;
 
             moveCount++;
+
             UpdateTargetCells();
             UpdateBoxTextures();
 
             if (IsLevelComplete())
             {
-                currentGameState = GameState.LevelSelection;
+                currentGameState = GameState.LevelCompleted;
             }
         }
+        //обновляет уровень
         private void RestartLevel()
         {
-            levelManager.LoadLevel(levelManager.CurrentLevel); // Сбрасываем уровень
-            InitializePlayerPosition(levelManager.CurrentMap); // Возвращаем игрока на старт
-            moveCount = 0;                                     // Сбрасываем счётчик ходов
-            secondsCounter = 0;                                // Сбрасываем таймер
-            elapsedTime = 0;                                   // Сбрасываем накопленное время
+            levelManager.LoadLevel(levelManager.CurrentLevel); 
+            InitializePlayerPosition(levelManager.CurrentMap); 
+            moveCount = 0;                                     
+            secondsCounter = 0;                                
+            elapsedTime = 0;                                   
         }
-
+        // форматирует таймер
         public string GetFormattedTime()
         {
-            int minutes = secondsCounter / 60; // Считаем минуты
-            int seconds = secondsCounter % 60; // Считаем секунды
+            int minutes = secondsCounter / 60; 
+            int seconds = secondsCounter % 60; 
             return $"{minutes:D2}:{seconds:D2}"; // форматируем строку времени 
         }
 
+
+        // метод отрисовывает игровое поле
         public void DrawGameField(GameTime gameTime)
         {
             
             elapsedTime += gameTime.ElapsedGameTime.TotalSeconds;
 
-            // Увеличиваем секундный счётчик, если прошло больше 1 секунды
+            // увеличиваем секундный счётчик, если прошло больше 1 секунды
             if (elapsedTime >= 1.0)
             {
                 secondsCounter++;
-                elapsedTime = 0; // Сбрасываем накопленное время для новой секунды
+                elapsedTime = 0; // сбрасываем накопленное время для новой секунды
             }
             if (levelManager.CurrentMap == null)
                 return;
@@ -347,7 +366,7 @@ namespace Sokoban
             _spriteBatch.DrawString(
                 textureManager.GetFont(),
                 $"Ходы: {moveCount}",
-                new Vector2(offsetX + fieldWidth + 20, offsetY), // Рядом с полем
+                new Vector2(offsetX + fieldWidth + 20, offsetY), // рядом с полем
                 Color.Black
             );
             // таймер начала уровня 
@@ -363,28 +382,34 @@ namespace Sokoban
             }
         }
 
+
+        // метод проверяет, завершен ли уровень
         public bool IsLevelComplete()
         {
             for (int y = 0; y < levelManager.CurrentMap.GetLength(0); y++)
             {
                 for (int x = 0; x < levelManager.CurrentMap.GetLength(1); x++)
                 {
-                    if (levelManager.CurrentMap[y, x] == TileType.Target)
-                       
+                    // если на клетке Target нет ящика, уровень не завершен
+                    if (levelManager.OriginalMap[y, x] == TileType.Target &&
+                        levelManager.CurrentMap[y, x] != TileType.BoxDocked)
+                    {
                         return false;
+                    }
                 }
             }
             return true;
         }
 
 
+        // возвращает цели на исходную клетку, если с ее клетки ушли
         private void UpdateTargetCells()
         {
             for (int y = 0; y < levelManager.CurrentMap.GetLength(0); y++)
             {
                 for (int x = 0; x < levelManager.CurrentMap.GetLength(1); x++)
                 {
-                    // Если клетка пустая, но в оригинальной карте была цель, возвращаем её
+                    // если клетка пустая, но в оригинальной карте была цель, возвращаем её
                     if (levelManager.CurrentMap[y, x] == TileType.Floor &&
                         levelManager.OriginalMap[y, x] == TileType.Target)
                     {
@@ -394,19 +419,19 @@ namespace Sokoban
             }
         }
 
-
+        // метод обновляет текстуру ящика, если он попал на цель 
         private void UpdateBoxTextures()
         {
             for (int y = 0; y < levelManager.CurrentMap.GetLength(0); y++)
             {
                 for (int x = 0; x < levelManager.CurrentMap.GetLength(1); x++)
                 {
-                    // Если ящик находится на цели, обновляем его текстуру
+                    // если ящик находится на цели, обновляем его текстуру
                     if (levelManager.CurrentMap[y, x] == TileType.Box && IsTargetUnderBox(x, y))
                     {
                         levelManager.CurrentMap[y, x] = TileType.BoxDocked;
                     }
-                    // Если ящик покинул цель, возвращаем ему обычную текстуру
+                    // если ящик покинул цель, возвращаем ему обычную текстуру
                     else if (levelManager.CurrentMap[y, x] == TileType.BoxDocked && !IsTargetUnderBox(x, y))
                     {
                         levelManager.CurrentMap[y, x] = TileType.Box;
@@ -415,11 +440,42 @@ namespace Sokoban
             }
         }
 
-        // Вспомогательный метод для проверки, находится ли цель под ящиком
+        // метод для проверки, находится ли цель под ящиком
         private bool IsTargetUnderBox(int x, int y)
         {
-            // Возвращает true, если на этом месте была цель
+            // возвращает true, если на этом месте была цель
             return levelManager.OriginalMap[y, x] == TileType.Target;
         }
+
+
+        // метод отрисовывает меню завершенного уровня 
+        private void DrawLevelCompletedScreen()
+        {
+            string completionText = "Уровень завершен!";
+            string timeText = $"Время: {GetFormattedTime()}";
+            string movesText = $"Ходы: {moveCount}";
+
+            Vector2 completionTextSize = textureManager.GetFont().MeasureString(completionText);
+            Vector2 timeTextSize = textureManager.GetFont().MeasureString(timeText);
+            Vector2 movesTextSize = textureManager.GetFont().MeasureString(movesText);
+
+            Vector2 screenCenter = new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2);
+
+            // рисуем текст в центре экрана
+            _spriteBatch.DrawString(textureManager.GetFont(), completionText, screenCenter - new Vector2(completionTextSize.X / 2, 80), Color.Black);
+            _spriteBatch.DrawString(textureManager.GetFont(), timeText, screenCenter - new Vector2(timeTextSize.X / 2, 40), Color.Black);
+            _spriteBatch.DrawString(textureManager.GetFont(), movesText, screenCenter - new Vector2(timeTextSize.X/2,0), Color.Black);
+
+            // рисуем кнопку "В меню"
+            Texture2D buttonTexture = new Texture2D(GraphicsDevice, 1, 1);
+            buttonTexture.SetData(new[] { Color.White });
+
+            SpriteFont font = textureManager.GetFont();
+            Button backToMenuButton = new Button(buttonTexture, font, new Rectangle((int)screenCenter.X - 100, (int)screenCenter.Y + 50, 200, 50), "В меню");
+            backToMenuButton.OnClick += () => currentGameState = GameState.LevelSelection;
+
+            backToMenuButton.Draw(_spriteBatch);
+        }
+
     }
 }
